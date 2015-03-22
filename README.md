@@ -7,7 +7,7 @@ On a CC Computer, run the shell command
 
 
 ```shell
-TODO: CREATE AN INSTALL SCRIPT
+TODO: CREATE AN INSTALL SCRIPT AND POST ON PASTEBIN
 ```
 
 
