@@ -1,0 +1,23 @@
+-- Check if it is an advanced computer
+function checkColor()
+	if not term.isColor then
+		error "Computer is not an Advanced Computer. To use this, it must be an advanced computer"
+	end
+	return true
+end
+
+-- Check if it is a pocket computer
+function checkPocket()
+	if pocket then
+		error "Pocket Computer support is coming soon"
+	end
+	return true
+end
+
+-- Check if HTTP requests to GitHub can be made
+function checkhttp()
+	if not http then
+		error "Unable to make HTTP Requests. Please make sure 'http' is set to true in the CC Config"
+	end
+	return true
+end

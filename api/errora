@@ -1,0 +1,36 @@
+os.pullEvent = os.pullEventRaw
+
+function getSize()
+	termX, termY = term.getSize()
+end
+
+function err(code, reason)
+	getSize()
+	term.setBackgroundColor(colors.blue)
+	term.setTextColor(1)
+	term.clear()
+
+	--Text, Subtext, Text Color, SubText Color, Bg Color, DefaultBGcolor, DefaultTextColor
+	titleBar.draw("CCRepo", "CRASH", colors.cyan, colors.red, 128, colors.blue, 1)  
+
+	printer.centered("CCRepo", 4)
+	printer.centered("An unexpected error has occurred", 5)
+	printer.centered("The error is listed below", 6)
+	code = code or "Unknown Error Code"
+	printer.centered(code, 8)
+	printer.centered("Brief Description of Error:", 10)
+	term.setCursorPos(1,13)
+	reasonLength = reason
+	if reason then
+		if #reasonLength >= termX then
+			print(reason)
+		else
+			printer.centered(reason, 15)
+		end
+	else
+		print("Description not provided")
+	end
+	printer.centered("Press any key to reboot", 19)
+	os.pullEvent("key")
+	os.reboot()
+end

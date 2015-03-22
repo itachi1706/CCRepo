@@ -1,0 +1,48 @@
+function grabURL()
+	url = "https://raw.githubusercontent.com/itachi1706/CCRepo/master/version"
+	return url
+end
+
+errorMsg = "ERROR-UPDATE"
+errorMsgFatal = "FATAL-UPDATE"
+
+function Check()
+	for i=1,3 do
+		url = grabURL()
+		if url == nil then
+			errora.err("Updater URL", "The Update Source URL is Empty! Report this if its not intended")
+		end
+		local response = http.get(url)
+		if response then
+			local data = response.readLine()
+			local f = fs.open("version", "r")
+			currentVersion = f.readLine()
+			f.close()
+			if data ~= currentVersion then
+				return true
+			else
+				return false
+			end
+		else
+			error "The Update URL cannot be resolved [404]"
+		end
+	end
+	error "Unreachable URL [208]"
+end
+
+function Update()	-- Updates Updater if needed
+	for i=1,3 do
+		local response = http.get(updateURL)
+		if response then
+			local data = response.readAll()
+			local f = io.open("/systemFiles/Install/updater")
+			f:write(data)
+			f:close()
+			return errorMes
+		else
+			return errorMes
+		end
+	end
+	return false
+	--error "Update request timed out"
+end
