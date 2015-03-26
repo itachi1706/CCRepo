@@ -3,7 +3,7 @@ This is the repository I will use to sync up my computercraft programs
 
 **First install instructions**
 
-On an ADVANCED CC Computer, run the following shell commands
+On an ADVANCED CC Computer, run the following shell commands and follow any instructions given
 
 
 ```shell
