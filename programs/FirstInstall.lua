@@ -183,7 +183,6 @@ downloadFiles("https://raw.githubusercontent.com/itachi1706/CCRepo/master/api/pr
 downloadFiles("https://raw.githubusercontent.com/itachi1706/CCRepo/master/api/titleBar", "/api/titleBar")
 downloadFiles("https://raw.githubusercontent.com/itachi1706/CCRepo/master/api/errora", "/api/errora")
 downloadFiles("https://raw.githubusercontent.com/itachi1706/CCRepo/master/README.md", "/Documentation/README")
-downloadFiles("https://raw.githubusercontent.com/itachi1706/CCRepo/master/LICENSE", "/Documentation/LICENSE")
 downloadFiles("https://raw.githubusercontent.com/itachi1706/CCRepo/master/FirstInstallScript.lua", "/Documentation/FirstInstallScript.lua")
 PrintCentered("Complete", 19)
 sleep(1)
