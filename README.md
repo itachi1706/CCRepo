@@ -3,11 +3,12 @@ This is the repository I will use to sync up my computercraft programs
 
 **First install instructions**
 
-On a CC Computer, run the shell command
+On an ADVANCED CC Computer, run the following shell commands
 
 
 ```shell
-TODO: CREATE AN INSTALL SCRIPT AND POST ON PASTEBIN
+pastebin get tkJ2gcpH installer
+installer
 ```
 
 
