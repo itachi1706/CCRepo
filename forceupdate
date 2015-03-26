@@ -1,0 +1,3 @@
+print("Force Updating...")
+sleep(2)
+shell.run("systemFiles/Install/updater")

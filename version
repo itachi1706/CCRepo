@@ -11,11 +11,12 @@ computer will update continuously ]]
  This Version ChangeLog
 --------------------------
 
-- Added BigReactors monitoring program
-- Added direwolf20's button API
+- Added a force updater
 
 --------------------------
  Old Version ChangeLogs
 --------------------------
 
 - Getting the API up
+- Added BigReactors monitoring program
+- Added direwolf20's button API

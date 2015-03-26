@@ -77,6 +77,7 @@ function downloader(quietDownload)
 	--Startup and Version file updates
 	if not download.git("https://raw.githubusercontent.com/itachi1706/CCRepo/master/startup", "startup") then return errMess end
 	if not download.git("https://raw.githubusercontent.com/itachi1706/CCRepo/master/version", "version") then return errMess end
+	if not download.git("https://raw.githubusercontent.com/itachi1706/CCRepo/master/forceupdate", "forceupdate") then return errMess end
 
 	--Program Updates
 	if not download.git("https://raw.githubusercontent.com/itachi1706/CCRepo/master/programs/test", "programs/test") then return errMess end

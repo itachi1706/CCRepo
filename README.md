@@ -9,6 +9,7 @@ On an ADVANCED CC Computer, run the following shell commands
 ```shell
 pastebin get tkJ2gcpH installer
 installer
+forceupdate
 ```
 
 
