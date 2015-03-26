@@ -12,10 +12,6 @@ installer
 forceupdate
 ```
 
-
-and then follow the instructions
-
-
 **Update Instructions**
 
 
