@@ -1,4 +1,4 @@
-0.0.0.8
+0.0.0.9
 
 - BETA BUILD
 
@@ -17,6 +17,7 @@ computer will update continuously ]]
 - Made it convert config file value into numbers
 - Fixed variable derp. I NEED TO STOP DOING THIS LOL
 - Adds a terminate program check to powerControl EIO
+- Added terminate into the right program...
 
 --------------------------
  Old Version ChangeLogs
