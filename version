@@ -1,4 +1,4 @@
-0.0.0.3
+0.0.0.4
 
 - BETA BUILD
 
@@ -12,6 +12,7 @@ computer will update continuously ]]
 --------------------------
 
 - Added an Ender IO Version of the Power Reactor Control Program
+- Fixed my brackets
 
 --------------------------
  Old Version ChangeLogs
@@ -20,3 +21,4 @@ computer will update continuously ]]
 - Getting the API up
 - Added BigReactors monitoring program
 - Added direwolf20's button API
+- Added Force Updater
