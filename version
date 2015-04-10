@@ -1,4 +1,4 @@
-0.0.0.6
+0.0.0.7
 
 - BETA BUILD
 
@@ -15,6 +15,7 @@ computer will update continuously ]]
 - Fixed my brackets
 - I also derped my fs API methods.... Facepalm
 - Made it convert config file value into numbers
+- Fixed variable derp. I NEED TO STOP DOING THIS LOL
 
 --------------------------
  Old Version ChangeLogs
