@@ -607,6 +607,9 @@ function displayScreen()
 	  repeat 
 		event, side, x, y = os.pullEvent()
 		print(event)
+    if event == "terminate" then
+      error() --Terminates the program
+    end
 		if event == "timer" then
 		   print(timerCode..":"..side)
 		   if timerCode ~= side then

@@ -1,4 +1,4 @@
-0.0.0.7
+0.0.0.8
 
 - BETA BUILD
 
@@ -16,6 +16,7 @@ computer will update continuously ]]
 - I also derped my fs API methods.... Facepalm
 - Made it convert config file value into numbers
 - Fixed variable derp. I NEED TO STOP DOING THIS LOL
+- Adds a terminate program check to powerControl EIO
 
 --------------------------
  Old Version ChangeLogs
