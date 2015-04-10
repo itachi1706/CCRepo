@@ -38,10 +38,10 @@ function defaultConfig()
   local file = fs.open("/programs/config/powerReactorControlConfig", "w")
   file.writeLine("# Number Of Capacitors (Default: 1)")
   file.writeLine("1") --Number of Capacitors
-  file.writeLine("# Turn Off Value (Default: 30)")
-  file.writeLine("30") --Turn Off Value
-  file.writeLine("# Turn On Value (Default: 75)")
-  file.writeLine("75") -- Turn On Value
+  file.writeLine("# Turn Off Value (Default: 75)")
+  file.writeLine("75") --Turn Off Value
+  file.writeLine("# Turn On Value (Default: 30)")
+  file.writeLine("30") -- Turn On Value
   file.writeLine("# Turbine Target Speed (Default: 1840)")
   file.writeLine("1840")  -- Turbine Target Speed
   file.close()
