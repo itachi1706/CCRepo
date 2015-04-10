@@ -50,14 +50,14 @@ function defaultConfig()
 end
 
 function updateConfig()
-  if not fs.exist("/programs/config") then
+  if not fs.exists("/programs/config") then
     fs.makeDir("/programs/config")
   end
   if not fs.isDir("/programs/config") then
     fs.delete("/programs/config")
     fs.makeDir("/programs/config")
   end
-  if not fs.exist("/programs/config/powerReactorControlConfig") then
+  if not fs.exists("/programs/config/powerReactorControlConfig") then
     defaultConfig()
   end
 
