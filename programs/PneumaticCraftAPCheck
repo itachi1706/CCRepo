@@ -1,0 +1,189 @@
+-- PneumaticCraft Air Pressure in tube Regulator Program
+-- Left Side is for High Pressure
+-- Right Side is for Low Pressure
+
+-- Initialize Sides
+monitor = peripheral.find("monitor")
+priTube = peripheral.wrap("right")
+secTube = peripheral.wrap("left")
+highPressureActive = false
+isBundledCable = true
+
+-- Local Variables
+-- Low Pressure (Tier 1) (4.5 bars)
+safevalLow = 4.5
+releasevalLow = false
+valLow = 0
+truePressureLow = 0
+
+-- High Pressure (Tier 2)
+safevalHigh = 9
+releasevalHigh = false
+valHigh = 0
+truePressureHigh = 0
+
+-- Color values
+redColor = colors.red
+whiteColor = colors.white
+bothColor = colors.red + colors.white
+
+-- Rounds number to a specific decimal point for printing
+function round(number, decimal)
+  local multiplier = 10^(decimal or 0)
+  return math.floor(number * multiplier + 0.5) / multiplier
+end
+
+-- Prints data on monitor for Low pressure
+function printOnMonitorLow()
+  monitor.setCursorPos(1,1)
+  monitor.setTextColor(colors.white)
+  monitor.write("Air Pressure: ")
+  monitor.setTextColor(colors.cyan)
+  monitor.write(round(truePressureLow,4))
+  monitor.setCursorPos(1,2)
+  monitor.setTextColor(colors.white)
+  monitor.write("Status: ")
+  if releasevalLowLow then
+    monitor.setTextColor(colors.red)
+    monitor.write("Unsafe - Releasing")
+    monitor.setCursorPos(1,3)
+    monitor.write("Air Pressure")
+  else
+    monitor.setTextColor(colors.green)
+    monitor.write("Safe Levels")
+  end
+  monitor.setCursorPos(1,4)
+  monitor.setTextColor(colors.white)
+  monitor.write("Air Pressure Threshold: ")    
+  monitor.setTextColor(colors.orange)
+  monitor.write(safevalLow)
+end
+
+-- Prints data on monitor for High pressure
+function printOnMonitorHigh()
+  monitor.setCursorPos(1,9)
+  monitor.setTextColor(colors.white)
+  monitor.write("Air Pressure: ")
+  monitor.setTextColor(colors.cyan)
+  monitor.write(round(truePressureLow,4))
+  monitor.setCursorPos(1,10)
+  monitor.setTextColor(colors.white)
+  monitor.write("Status: ")
+  if releasevalLowLow then
+    monitor.setTextColor(colors.red)
+    monitor.write("Unsafe - Releasing")
+    monitor.setCursorPos(1,11)
+    monitor.write("Air Pressure")
+  else
+    monitor.setTextColor(colors.green)
+    monitor.write("Safe Levels")
+  end
+  monitor.setCursorPos(1,12)
+  monitor.setTextColor(colors.white)
+  monitor.write("Air Pressure Threshold: ")    
+  monitor.setTextColor(colors.orange)
+  monitor.write(safevalLow/2)
+end
+
+-- If colored cables for Low Pressure
+function colorLow()
+  truePressureLow = priTube.getPressure()
+  print("Pressure: "..truePressureLow)
+  if truePressureLow >= safevalLow and rs.getBundledOutput("bottom") == 0 then
+    print("Overflow Air Pressure. Releasing...")
+    if rs.getBundledOutput("bottom") == whiteColor then
+      -- White is already active, enable both
+      rs.setBundledOutput("bottom", bothColor)
+    else
+      -- Enable Red
+      rs.setBundledOutput("bottom", redColor)
+    end
+    relesevalLow = true
+  elseif rs.getBundledOutput("bottom") == bothColor or rs.getBundledOutput("bottom") == redColor then
+    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    if rs.getBundledOutput("bottom") == bothColor then
+      -- Disable Red but keep white on
+      rs.setBundledOutput("bottom", whiteColor)
+    else
+      -- Disable red
+      rs.setBundledOutput("bottom", 0)
+    end
+    releasevalLow = false
+  end
+end
+
+-- If colored cables for High Pressure
+function colorHigh()
+  truePressureHigh = priTube.getPressure()
+  print("Pressure: "..truePressureLow)
+  if truePressureLow >= safevalLow and rs.getBundledOutput("bottom") == 0 then
+    print("Overflow Air Pressure. Releasing...")
+    if rs.getBundledOutput("bottom") == redColor then
+      -- Red is already active, enable both
+      rs.setBundledOutput("bottom", bothColor)
+    else
+      -- Enable white
+      rs.setBundledOutput("bottom", whiteColor)
+    end
+    relesevalLow = true
+  elseif rs.getBundledOutput("bottom") == bothColor or rs.getBundledOutput("bottom") == whiteColor then
+    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    if rs.getBundledOutput("bottom") == bothColor then
+      -- Disable white but keep red on
+      rs.setBundledOutput("bottom", redColor)
+    else
+      -- Disable white
+      rs.setBundledOutput("bottom", 0)
+    end
+    releasevalLow = false
+  end
+end
+
+-- If non colored cables (Legacy Method)
+function nonColorLow()
+  truePressureLow = priTube.getPressure()
+  print("Pressure: "..truePressureLow)
+  if truePressureLow >= safevalLow and not rs.getOutput("bottom") then
+    print("Overflow Air Pressure. Releasing...")
+    rs.setOutput("bottom", true)
+    relesevalLow = true
+  elseif rs.getOutput("bottom") then
+    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    rs.setOutput("bottom", false)
+    releasevalLow = false
+  end
+end
+
+--TODO
+function nonColorHigh()
+  truePressureLow = priTube.getPressure()
+  print("Pressure: "..truePressureLow)
+  if valLow >= safevalLow and not rs.getOutput("bottom") then
+    print("Overflow Air Pressure. Releasing...")
+    rs.setOutput("bottom", true)
+    relesevalLow = true
+  elseif rs.getOutput("bottom") then
+    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    rs.setOutput("bottom", false)
+    releasevalLow = false
+  end
+end
+
+while true do
+  if not isBundledCable then
+    nonColorLow()
+    if highPressureActive then
+      nonColorHigh()
+    end
+  else
+    colorLow()
+    if highPressureActive then
+      colorHigh()
+    end
+  end
+  if monitor then
+    monitor.clear()
+    printOnMonitorLow()
+  end
+  sleep(1)
+end
