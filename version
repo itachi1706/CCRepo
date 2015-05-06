@@ -1,6 +1,6 @@
-0.0.0.10
+0.0.1.0
 
-- BETA BUILD
+- STABLE BUILD
 
 -[[ This contains the version number of all the files, if this is changed on GitHub then local computers will update to the 
 new version number and download all the files again, please ensure you leave the version number in the first line or else the 
@@ -11,14 +11,7 @@ computer will update continuously ]]
  This Version ChangeLog
 --------------------------
 
-- Added an Ender IO Version of the Power Reactor Control Program
-- Fixed my brackets
-- I also derped my fs API methods.... Facepalm
-- Made it convert config file value into numbers
-- Fixed variable derp. I NEED TO STOP DOING THIS LOL
-- Adds a terminate program check to powerControl EIO
-- Added terminate into the right program...
-- Turn off/on value fixed
+- Added PneumaticCraft Regulator Program
 
 --------------------------
  Old Version ChangeLogs
@@ -28,3 +21,11 @@ computer will update continuously ]]
 - Added BigReactors monitoring program
 - Added direwolf20's button API
 - Added Force Updater
+- Added an Ender IO Version of the Power Reactor Control Program
+- Fixed my brackets
+- I also derped my fs API methods.... Facepalm
+- Made it convert config file value into numbers
+- Fixed variable derp. I NEED TO STOP DOING THIS LOL
+- Adds a terminate program check to powerControl EIO
+- Added terminate into the right program...
+- Turn off/on value fixed
