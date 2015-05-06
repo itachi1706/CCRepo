@@ -1,5 +1,12 @@
 -- PneumaticCraft Air Pressure in tube Regulator Program
+
+-- Requirements
+-- 4x3 Advanced Monitor (4 tall, 3 wide)
+-- 1 Advanced Computer running this code
+-- Bundled cable, with red pointing to low pressure and white pointing to high pressure
 -- Left Side is for High Pressure
+-- Right Side of computer is Low Pressure
+-- Network cable connecting to the monitor
 -- Right Side is for Low Pressure
 
 -- Initialize Sides
@@ -33,26 +40,84 @@ function round(number, decimal)
   return math.floor(number * multiplier + 0.5) / multiplier
 end
 
+-- Line 1-8 is Low (1-4 is title)
+-- Line 10-17 is High  (10-13 is title)
+
+-- ============================
+--   Low Air Pressure Status
+-- ============================
+-- Status: Active/Inactive
+
+-- ============================
+--   High Air Pressure Status
+-- ============================
+-- Status: Active/Inactive
+
+function printTitleOnMonitor(status)
+  if status == "Low" then
+    monitor.setCursorPos(1, 1)
+    monitor.setTextColor(colors.white)
+    monitor.write("============================")
+    monitor.setCursorPos(1, 2)
+    monitor.setTextColor(colors.white)
+    monitor.write("  Low Air Pressure Status")
+    monitor.setCursorPos(1, 3)
+    monitor.setTextColor(colors.white)
+    monitor.write("============================")
+    monitor.setCursorPos(1, 4)
+    monitor.setTextColor(colors.white)
+    monitor.write("Status: ")
+    if (peripheral.isPresent("right"))
+      monitor.setTextColor(colors.green)
+      monitor.setTextColor("Active")
+    else
+      monitor.setTextColor(colors.red)
+      monitor.setTextColor("Inactive")
+    end
+  else
+    monitor.setCursorPos(1, 10)
+    monitor.setTextColor(colors.white)
+    monitor.write("============================")
+    monitor.setCursorPos(1, 11)
+    monitor.setTextColor(colors.white)
+    monitor.write("  High Air Pressure Status")
+    monitor.setCursorPos(1, 12)
+    monitor.setTextColor(colors.white)
+    monitor.write("============================")
+    monitor.setCursorPos(1, 13)
+    monitor.setTextColor(colors.white)
+    monitor.write("Status: ")
+    if (peripheral.isPresent("left"))
+      monitor.setTextColor(colors.green)
+      monitor.setTextColor("Active")
+    else
+      monitor.setTextColor(colors.red)
+      monitor.setTextColor("Inactive")
+    end
+  end
+end
+
 -- Prints data on monitor for Low pressure
 function printOnMonitorLow()
-  monitor.setCursorPos(1,1)
+  printTitleOnMonitor("Low")
+  monitor.setCursorPos(1,5)
   monitor.setTextColor(colors.white)
   monitor.write("Air Pressure: ")
   monitor.setTextColor(colors.cyan)
   monitor.write(round(truePressureLow,4))
-  monitor.setCursorPos(1,2)
+  monitor.setCursorPos(1,6)
   monitor.setTextColor(colors.white)
   monitor.write("Status: ")
   if releasevalLowLow then
     monitor.setTextColor(colors.red)
     monitor.write("Unsafe - Releasing")
-    monitor.setCursorPos(1,3)
+    monitor.setCursorPos(1,7)
     monitor.write("Air Pressure")
   else
     monitor.setTextColor(colors.green)
     monitor.write("Safe Levels")
   end
-  monitor.setCursorPos(1,4)
+  monitor.setCursorPos(1,8)
   monitor.setTextColor(colors.white)
   monitor.write("Air Pressure Threshold: ")    
   monitor.setTextColor(colors.orange)
@@ -61,36 +126,39 @@ end
 
 -- Prints data on monitor for High pressure
 function printOnMonitorHigh()
-  monitor.setCursorPos(1,9)
+  printTitleOnMonitor("High")
+  monitor.setCursorPos(1,14)
   monitor.setTextColor(colors.white)
   monitor.write("Air Pressure: ")
   monitor.setTextColor(colors.cyan)
-  monitor.write(round(truePressureLow,4))
-  monitor.setCursorPos(1,10)
+  monitor.write(round(truePressureHigh,4))
+  monitor.setCursorPos(1,15)
   monitor.setTextColor(colors.white)
   monitor.write("Status: ")
-  if releasevalLowLow then
+  if releasevalHigh then
     monitor.setTextColor(colors.red)
     monitor.write("Unsafe - Releasing")
-    monitor.setCursorPos(1,11)
+    monitor.setCursorPos(1,16)
     monitor.write("Air Pressure")
   else
     monitor.setTextColor(colors.green)
     monitor.write("Safe Levels")
   end
-  monitor.setCursorPos(1,12)
+  monitor.setCursorPos(1,17)
   monitor.setTextColor(colors.white)
   monitor.write("Air Pressure Threshold: ")    
   monitor.setTextColor(colors.orange)
-  monitor.write(safevalLow/2)
+  monitor.write(safevalHigh)
 end
+
+-- Data Gathering
 
 -- If colored cables for Low Pressure
 function colorLow()
   truePressureLow = priTube.getPressure()
-  print("Pressure: "..truePressureLow)
+  print("Low Pressure: "..truePressureLow)
   if truePressureLow >= safevalLow and rs.getBundledOutput("bottom") == 0 then
-    print("Overflow Air Pressure. Releasing...")
+    print("Low Overflow Air Pressure. Releasing...")
     if rs.getBundledOutput("bottom") == whiteColor then
       -- White is already active, enable both
       rs.setBundledOutput("bottom", bothColor)
@@ -100,7 +168,7 @@ function colorLow()
     end
     relesevalLow = true
   elseif rs.getBundledOutput("bottom") == bothColor or rs.getBundledOutput("bottom") == redColor then
-    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    print("Low Air Pressure back to reasonable levels. Stop Releasing...")
     if rs.getBundledOutput("bottom") == bothColor then
       -- Disable Red but keep white on
       rs.setBundledOutput("bottom", whiteColor)
@@ -114,58 +182,58 @@ end
 
 -- If colored cables for High Pressure
 function colorHigh()
-  truePressureHigh = priTube.getPressure()
-  print("Pressure: "..truePressureLow)
-  if truePressureLow >= safevalLow and rs.getBundledOutput("bottom") == 0 then
-    print("Overflow Air Pressure. Releasing...")
+  truePressureHigh = secTube.getPressure()
+  print("High Pressure: "..truePressureHigh)
+  if truePressureHigh >= safevalHigh and rs.getBundledOutput("bottom") == 0 then
+    print("High Overflow Air Pressure. Releasing...")
     if rs.getBundledOutput("bottom") == redColor then
       -- Red is already active, enable both
       rs.setBundledOutput("bottom", bothColor)
     else
-      -- Enable white
+      -- Enable White
       rs.setBundledOutput("bottom", whiteColor)
     end
-    relesevalLow = true
+    relesevalHigh = true
   elseif rs.getBundledOutput("bottom") == bothColor or rs.getBundledOutput("bottom") == whiteColor then
-    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    print("High Air Pressure back to reasonable levels. Stop Releasing...")
     if rs.getBundledOutput("bottom") == bothColor then
-      -- Disable white but keep red on
+      -- Disable White but keep red on
       rs.setBundledOutput("bottom", redColor)
     else
       -- Disable white
       rs.setBundledOutput("bottom", 0)
     end
-    releasevalLow = false
+    releasevalHigh = false
   end
 end
 
--- If non colored cables (Legacy Method)
+-- If non colored cables for Low Pressure (Legacy Method)
 function nonColorLow()
   truePressureLow = priTube.getPressure()
-  print("Pressure: "..truePressureLow)
+  print("Low Pressure: "..truePressureLow)
   if truePressureLow >= safevalLow and not rs.getOutput("bottom") then
-    print("Overflow Air Pressure. Releasing...")
+    print("Low Overflow Air Pressure. Releasing...")
     rs.setOutput("bottom", true)
     relesevalLow = true
   elseif rs.getOutput("bottom") then
-    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    print("Low Air Pressure back to reasonable levels. Stop Releasing...")
     rs.setOutput("bottom", false)
     releasevalLow = false
   end
 end
 
---TODO
+-- If non colored cables for High Pressure (Legacy Method)
 function nonColorHigh()
-  truePressureLow = priTube.getPressure()
-  print("Pressure: "..truePressureLow)
-  if valLow >= safevalLow and not rs.getOutput("bottom") then
-    print("Overflow Air Pressure. Releasing...")
+  truePressureHigh = secTube.getPressure()
+  print("High Pressure: "..truePressureHigh)
+  if valHigh >= safevalHigh and not rs.getOutput("bottom") then
+    print("Overflow High Air Pressure. Releasing...")
     rs.setOutput("bottom", true)
-    relesevalLow = true
+    relesevalHigh = true
   elseif rs.getOutput("bottom") then
-    print("Air Pressure back to reasonable levels. Stop Releasing...")
+    print("High Air Pressure back to reasonable levels. Stop Releasing...")
     rs.setOutput("bottom", false)
-    releasevalLow = false
+    releasevalHigh = false
   end
 end
 
@@ -184,6 +252,7 @@ while true do
   if monitor then
     monitor.clear()
     printOnMonitorLow()
+    printOnMonitorHigh()
   end
   sleep(1)
 end
