@@ -14,6 +14,7 @@ computer will update continuously ]]
  This Version ChangeLog
 --------------------------
 
+- Gave up on making terminate work lol
 - Fixed derp with =
 - Updated Startup script to get build status from version file
 - Forgot to replace the other method lol.
