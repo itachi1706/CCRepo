@@ -3,7 +3,7 @@
 ==============
  Build Status
 ==============
-STABLE
+TEST
 
 -[[ This contains the version number of all the files, if this is changed on GitHub then local computers will update to the 
 new version number and download all the files again, please ensure you leave the version number in the first line or else the 
@@ -14,6 +14,7 @@ computer will update continuously ]]
  This Version ChangeLog
 --------------------------
 
+- Fixed derp with =
 - Updated Startup script to get build status from version file
 - Forgot to replace the other method lol.
 - Fixed monitor print derp (should be write instead of setting text color)

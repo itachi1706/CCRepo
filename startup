@@ -85,7 +85,7 @@ shell.run("systemFiles/Install/updater", "quiet")
 errora.err(nil, "The Updater Experienced An Unknown Exception, Or It Ended With No Protocol, If the issue persists, report it")
 elseif updateState == false then
 buildVer = update.GetBuildStatus()
-if buildVer = nil then
+if buildVer == nil then
   PrintCentered("You Are Running The Latest UNKNOWN Version!", 19)
 else
   PrintCentered("You Are Running The Latest "..buildVer.." Version!", 19)
