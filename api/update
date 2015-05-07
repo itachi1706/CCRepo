@@ -30,6 +30,30 @@ function Check()
 	error "Unreachable URL [208]"
 end
 
+function GetBuildStatus()
+	for i=1,3 do
+		url = grabURL()
+		if url == nil then
+			errora.err("Updater URL", "The Update Source URL is Empty! Report this if its not intended")
+		end
+		local response = http.get(url)
+		if response then
+			local data = response.readLine()
+			local f = fs.open("version", "r")
+			for i=1,5 do
+				f.readLine()
+			end
+			currentVersion = f.readLine()
+			f.close()
+			return currentVersion
+		else
+			error "The Update URL cannot be resolved [404]"
+		end
+	end
+	error "Unreachable URL [208]"
+end
+
+
 function Update()	-- Updates Updater if needed
 	for i=1,3 do
 		local response = http.get(updateURL)
