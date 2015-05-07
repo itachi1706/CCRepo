@@ -67,7 +67,7 @@ function printTitleOnMonitor(status)
     monitor.setCursorPos(1, 4)
     monitor.setTextColor(colors.white)
     monitor.write("Status: ")
-    if (peripheral.isPresent("right"))
+    if (peripheral.isPresent("right")) then
       monitor.setTextColor(colors.green)
       monitor.setTextColor("Active")
     else
@@ -87,7 +87,7 @@ function printTitleOnMonitor(status)
     monitor.setCursorPos(1, 13)
     monitor.setTextColor(colors.white)
     monitor.write("Status: ")
-    if (peripheral.isPresent("left"))
+    if (peripheral.isPresent("left")) then
       monitor.setTextColor(colors.green)
       monitor.setTextColor("Active")
     else

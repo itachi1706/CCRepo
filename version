@@ -1,4 +1,4 @@
-0.0.1.0
+0.0.1.1
 
 - STABLE BUILD
 
@@ -11,6 +11,7 @@ computer will update continuously ]]
  This Version ChangeLog
 --------------------------
 
+- Fixed derp of invalid if statements
 - Added PneumaticCraft Regulator Program
 
 --------------------------
