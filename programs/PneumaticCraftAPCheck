@@ -69,10 +69,10 @@ function printTitleOnMonitor(status)
     monitor.write("Status: ")
     if (peripheral.isPresent("right")) then
       monitor.setTextColor(colors.green)
-      monitor.setTextColor("Active")
+      monitor.write("Active")
     else
       monitor.setTextColor(colors.red)
-      monitor.setTextColor("Inactive")
+      monitor.write("Inactive")
     end
   else
     monitor.setCursorPos(1, 10)
