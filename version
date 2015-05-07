@@ -1,4 +1,4 @@
-0.0.1.2
+0.0.1.3
 
 - STABLE BUILD
 
@@ -11,6 +11,7 @@ computer will update continuously ]]
  This Version ChangeLog
 --------------------------
 
+- Forgot to replace the other method lol.
 - Fixed monitor print derp (should be write instead of setting text color)
 - Fixed derp of invalid if statements
 - Added PneumaticCraft Regulator Program
