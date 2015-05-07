@@ -13,7 +13,7 @@
 monitor = peripheral.find("monitor")
 priTube = peripheral.wrap("right")
 secTube = peripheral.wrap("left")
-highPressureActive = false
+highPressureActive = true
 isBundledCable = true
 
 -- Local Variables
