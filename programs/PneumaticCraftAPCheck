@@ -24,7 +24,7 @@ valLow = 0
 truePressureLow = 0
 
 -- High Pressure (Tier 2)
-safevalHigh = 9
+safevalHigh = 19
 releasevalHigh = false
 valHigh = 0
 truePressureHigh = 0

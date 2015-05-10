@@ -1,4 +1,4 @@
-0.0.1.7
+0.0.1.8
 
 ==============
  Build Status
@@ -14,6 +14,7 @@ computer will update continuously ]]
  This Version ChangeLog
 --------------------------
 
+- Updated High Pressure Threshold to 19
 - Activate high pressure :D
 - Colored the title bar to make it nicer
 - Gave up on making terminate work lol
